@@ -1,0 +1,64 @@
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
+
+// Separate instance for auth endpoints (without /posts prefix)
+const authApi = axios.create({
+  baseURL: 'http://localhost:5000',
+});
+
+// Request interceptor to attach token to every request
+api.interceptors.request.use((config) => {
+  try {
+    const profileStr = localStorage.getItem('profile');
+    const profile = profileStr ? JSON.parse(profileStr) : null;
+    if (profile?.token) {
+      config.headers.Authorization = `Bearer ${profile.token}`;
+    }
+  } catch (error) {
+    console.error('Error parsing profile from localStorage:', error);
+  }
+  return config;
+}, (error) => {
+  console.error('Request interceptor error:', error);
+  return Promise.reject(error);
+});
+
+// Response interceptor for better error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      console.error('❌ 401 Unauthorized - token may be invalid or expired');
+      console.error('Response:', error.response?.data);
+      // Clear invalid token
+      localStorage.removeItem('profile');
+    }
+    return Promise.reject(error);
+  }
+);
+
+authApi.interceptors.request.use((config) => {
+  try {
+    const profileStr = localStorage.getItem('profile');
+    const profile = profileStr ? JSON.parse(profileStr) : null;
+    console.log('AuthAPI request interceptor - stored profile:', profile);
+    if (profile?.token) {
+      config.headers.Authorization = `Bearer ${profile.token}`;
+      console.log('✓ Added Authorization header');
+    } else {
+      console.log('⚠ No token found in profile');
+    }
+  } catch (error) {
+    console.error('Error parsing profile from localStorage:', error);
+  }
+  return config;
+}, (error) => {
+  console.error('Request interceptor error:', error);
+  return Promise.reject(error);
+});
+
+export default api;
+export { authApi };
