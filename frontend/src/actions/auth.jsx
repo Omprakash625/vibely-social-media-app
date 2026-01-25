@@ -7,11 +7,7 @@ export const googleLogin = createAsyncThunk(
   async (credential, { rejectWithValue }) => {
     try {
       const response = await api.googleLogin(credential);
-      console.log('Raw response:', response);
       const { data } = response;
-      console.log('Response data structure:', data);
-      console.log('data.token:', data.token);
-      console.log('data.user:', data.user);
       
       // Ensure token exists
       const token = data.token;
@@ -27,10 +23,7 @@ export const googleLogin = createAsyncThunk(
         result: user,
         token: token 
       };
-      console.log('Profile to store:', profileData);
       localStorage.setItem('profile', JSON.stringify(profileData));
-      console.log('✓ Profile stored successfully');
-      console.log('Stored profile:', JSON.parse(localStorage.getItem('profile')));
       return user;
     } catch (error) {
       console.error('Google login error:', error);
@@ -45,11 +38,7 @@ export const signin = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await signIn(formData);
-      console.log('Raw response:', response);
       const { data } = response;
-      console.log('Response data structure:', data);
-      console.log('data.token:', data.token);
-      console.log('data.result:', data.result);
       
       // Ensure token exists
       const token = data.token;
@@ -65,10 +54,7 @@ export const signin = createAsyncThunk(
         result: user,
         token: token 
       };
-      console.log('Profile to store:', profileData);
       localStorage.setItem('profile', JSON.stringify(profileData));
-      console.log('✓ Profile stored successfully');
-      console.log('Stored profile:', JSON.parse(localStorage.getItem('profile')));
       return user;
     } catch (error) {
       console.error('Sign in error:', error);
@@ -83,11 +69,7 @@ export const signup = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await signUp(formData);
-      console.log('Raw response:', response);
       const { data } = response;
-      console.log('Response data structure:', data);
-      console.log('data.token:', data.token);
-      console.log('data.result:', data.result);
       
       // Ensure token exists
       const token = data.token;
@@ -103,10 +85,7 @@ export const signup = createAsyncThunk(
         result: user,
         token: token 
       };
-      console.log('Profile to store:', profileData);
       localStorage.setItem('profile', JSON.stringify(profileData));
-      console.log('✓ Profile stored successfully');
-      console.log('Stored profile:', JSON.parse(localStorage.getItem('profile')));
       return user;
     } catch (error) {
       console.error('Sign up error:', error);
