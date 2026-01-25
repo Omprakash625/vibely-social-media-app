@@ -1,0 +1,32 @@
+services:
+  # Frontend
+  - type: web
+    name: vibely-frontend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && node server.js
+    envVars:
+      - key: VITE_API_URL
+        value: https://vibely-social-media-app.onrender.com
+      - key: VITE_AUTH_API_URL
+        value: https://vibely-social-media-app.onrender.com/auth
+      - key: VITE_GOOGLE_CLIENT_ID
+        value: 217969336180-0mali2q04124q7elim8mig1ej576d8b6.apps.googleusercontent.com
+
+  # Backend
+  - type: web
+    name: vibely-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: "5000"
