@@ -44,10 +44,8 @@ authApi.interceptors.request.use((config) => {
   try {
     const profileStr = localStorage.getItem('profile');
     const profile = profileStr ? JSON.parse(profileStr) : null;
-    console.log('AuthAPI request interceptor - stored profile:', profile);
     if (profile?.token) {
       config.headers.Authorization = `Bearer ${profile.token}`;
-      console.log('✓ Added Authorization header');
     } else {
       console.log('⚠ No token found in profile');
     }

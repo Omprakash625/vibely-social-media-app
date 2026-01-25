@@ -63,9 +63,6 @@ const Auth = () => {
       const result = jwtDecode(res?.credential);
       const token = res?.credential;
 
-      console.log("Decoded user info:", result);
-      console.log("Google token:", token);
-
       // Dispatch the Redux thunk to store user in backend + Redux state
       dispatch(googleLogin(token));
     } catch (error) {
