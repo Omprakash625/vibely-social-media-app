@@ -4,9 +4,9 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-// Separate instance for auth endpoints (without /posts prefix)
+// Separate instance for auth endpoints - use environment variable for deployment
 const authApi = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: import.meta.env.VITE_AUTH_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000',
 });
 
 // Request interceptor to attach token to every request

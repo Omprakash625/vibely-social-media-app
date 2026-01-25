@@ -31,7 +31,7 @@ export const googleLogin = async (req, res) => {
         }
 
         // Generate JWT token with user's MongoDB _id
-        const token = jwt.sign({ email: user.email, id: user._id }, 'test', { expiresIn: '1h' });
+        const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET || 'test', { expiresIn: '1h' });
 
         // Return user data with token
         res.status(200).json({

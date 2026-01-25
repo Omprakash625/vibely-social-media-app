@@ -9,7 +9,7 @@ This project demonstrates real-world full-stack development concepts including a
 
 ## 🔗 Live Demo
 
-> 🚧 *Coming Soon*  
+> [Vibely – Social Media App](https://vibely-social-media-app-1.onrender.com/)
 
 ---
 
