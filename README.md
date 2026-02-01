@@ -74,7 +74,7 @@ Ensure you have the following installed:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/vibely.git
+git clone https://github.com/Omprakash625/vibely.git
 cd vibely
 ```
 ### 2️⃣ Environment Variables
