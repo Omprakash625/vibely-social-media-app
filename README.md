@@ -43,7 +43,7 @@ This project demonstrates real-world full-stack development concepts including a
 ### Frontend
 - React
 - JavaScript (ES6+)
-- CSS / Tailwind / Material UI *(adjust as needed)*
+- CSS / Material UI
 
 ### Backend
 - Node.js
